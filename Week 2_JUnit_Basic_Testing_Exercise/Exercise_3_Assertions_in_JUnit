@@ -1,0 +1,65 @@
+import org.junit.*; // Use JUnit 4 annotations
+import static org.junit.Assert.*;
+
+
+public class CombinedJUnitTest {
+
+    private String sampleData;
+
+    // 🛠 SETUP method (runs before each test)
+    @Before
+    public void setUp() {
+        sampleData = "JUnitTest";
+        System.out.println("Setup complete.");
+    }
+
+ 
+    @After
+    public void tearDown() {
+        sampleData = null;
+        System.out.println("Teardown complete.");
+    }
+
+
+    @Test
+    public void testAssertions() {
+        // Arrange-Act-Assert style structure
+
+        // Assert equals
+        assertEquals(5, 2 + 3);
+
+        // Assert true
+        assertTrue(5 > 3);
+
+        // Assert false
+        assertFalse(5 < 3);
+
+        // Assert null
+        assertNull(null);
+
+        // Assert not null
+        assertNotNull(new Object());
+    }
+
+
+    @Test
+    public void testStringLength() {
+        // Arrange
+        String input = sampleData;
+
+        // Act
+        int length = input.length();
+
+        // Assert
+        assertEquals(9, length);  // "JUnitTest" has 9 characters
+    }
+
+    @Test
+    public void testStringContains() {
+        // Arrange
+        String input = sampleData;
+
+        // Act & Assert
+        assertTrue(input.contains("Test"));
+    }
+}
