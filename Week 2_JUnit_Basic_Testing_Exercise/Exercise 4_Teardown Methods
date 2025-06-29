@@ -1,0 +1,48 @@
+import org.junit.Before;
+import org.junit.After;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class AaaPatternTest {
+
+    private String testString;
+
+   
+    @Before
+    public void setUp() {
+        testString = "JUnitIsGreat";
+        System.out.println("Setup complete.");
+    }
+
+    
+    @After
+    public void tearDown() {
+        testString = null;
+        System.out.println("Teardown complete.");
+    }
+
+   
+    @Test
+    public void testStringLength() {
+        // Arrange
+        String input = testString;
+
+        // Act
+        int length = input.length();
+
+        // Assert
+        assertEquals(13, length);
+    }
+
+    @Test
+    public void testStringContainsWord() {
+        // Arrange
+        String input = testString;
+
+        // Act
+        boolean contains = input.contains("Great");
+
+        // Assert
+        assertTrue(contains);
+    }
+}
