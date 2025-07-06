@@ -1,0 +1,91 @@
+--Project: LibraryManagement (Maven Project)
+
+// pom.xml
+/*
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.library</groupId>
+    <artifactId>LibraryManagement</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <!-- Spring Core -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.3.36</version>
+        </dependency>
+    </dependencies>
+</project>
+*/
+
+// === applicationContext.xml ===
+/*
+Place this file under: src/main/resources/applicationContext.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Repository Bean -->
+    <bean id="bookRepository" class="com.library.repository.BookRepository"/>
+
+    <!-- Service Bean -->
+    <bean id="bookService" class="com.library.service.BookService">
+        <property name="bookRepository" ref="bookRepository"/>
+    </bean>
+</beans>
+*/
+
+//  com.library.repository.BookRepository.java ===
+package com.library.repository;
+
+public class BookRepository {
+    public void displayBooks() {
+        System.out.println("📚 Repository: Displaying list of books...");
+    }
+}
+
+// com.library.service.BookService.java ===
+package com.library.service;
+
+import com.library.repository.BookRepository;
+
+public class BookService {
+    private BookRepository bookRepository;
+
+    // Setter for Spring to inject dependency
+    public void setBookRepository(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
+
+    public void showBooks() {
+        System.out.println("🛠️ Service: Delegating to repository...");
+        bookRepository.displayBooks();
+    }
+}
+
+// === com.library.main.MainApp.java ===
+package com.library.main;
+
+import com.library.service.BookService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class MainApp {
+    public static void main(String[] args) {
+        // Load Spring context from XML
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+
+        // Get service bean and invoke method
+        BookService bookService = (BookService) context.getBean("bookService");
+        bookService.showBooks();
+    }
+}
