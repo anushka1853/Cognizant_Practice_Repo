@@ -1,0 +1,99 @@
+<!-- ======================= -->
+<!-- pom.xml -->
+<!-- ======================= -->
+<!-- Save this as pom.xml in the project root -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>ProductApp</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <!-- Spring Context for Core Functionality -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.3.36</version>
+        </dependency>
+    </dependencies>
+</project>
+
+<!-- ============================== -->
+<!-- src/main/resources/applicationContext.xml -->
+<!-- ============================== -->
+<!-- Save this as applicationContext.xml inside src/main/resources -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Repository Bean -->
+    <bean id="productRepository" class="com.example.repository.ProductRepository"/>
+
+    <!-- Service Bean with Setter Injection -->
+    <bean id="productService" class="com.example.service.ProductService">
+        <property name="productRepository" ref="productRepository"/>
+    </bean>
+
+</beans>
+// ==============================
+// src/main/java/com/example/repository/ProductRepository.java
+// ==============================
+
+package com.example.repository;
+
+public class ProductRepository {
+    public void listProducts() {
+        System.out.println("ProductRepository: Listing products...");
+    }
+}
+
+// ==============================
+// src/main/java/com/example/service/ProductService.java
+// ==============================
+
+package com.example.service;
+
+import com.example.repository.ProductRepository;
+
+public class ProductService {
+
+    private ProductRepository productRepository;
+
+    // Setter used by Spring for dependency injection
+    public void setProductRepository(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
+    public void displayProducts() {
+        System.out.println("ProductService: Calling repository...");
+        productRepository.listProducts();
+    }
+}
+
+// ==============================
+// src/main/java/com/example/main/MainApp.java
+// ==============================
+
+package com.example.main;
+
+import com.example.service.ProductService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class MainApp {
+    public static void main(String[] args) {
+        // Load Spring configuration
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+
+        // Retrieve and use the bean
+        ProductService productService = (ProductService) context.getBean("productService");
+        productService.displayProducts();
+    }
+}
