@@ -26,13 +26,13 @@ public class SpringLearnApplication {
         SpringApplication.run(SpringLearnApplication.class, args);
         log.debug("END main()");
     } 
-  /* REST ENDPOINT: Hello World */
+  /* REST ENDPOINT: Hello from Spring Boot */
 
 
     @GetMapping("/hello")
     public String sayHello() {
         log.debug("START sayHello()");
-        String msg = "Hello World!!";
+        String msg = "Hello from Spring Boot";
         log.debug("END sayHello()");
         return msg;
     }
