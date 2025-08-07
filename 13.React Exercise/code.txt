@@ -1,0 +1,68 @@
+// App.js
+
+import React from "react";
+import "./App.css";
+
+// Conditional Rendering Type 1: Using if condition
+function CourseDetails({ show }) {
+  if (!show) return null;
+  return (
+    <div className="column">
+      <h2>Course Details</h2>
+      <h3>Angular</h3>
+      <p>4/5/2021</p>
+      <h3>React</h3>
+      <p>6/3/20201</p>
+    </div>
+  );
+}
+
+// Conditional Rendering Type 2: Using && operator
+function BookDetails({ show }) {
+  return (
+    <>
+      {show && (
+        <div className="column">
+          <h2>Book Details</h2>
+          <h3>Master React</h3>
+          <p>670</p>
+          <h3>Deep Dive into Angular 11</h3>
+          <p>800</p>
+          <h3>Mongo Essentials</h3>
+          <p>450</p>
+        </div>
+      )}
+    </>
+  );
+}
+
+// Conditional Rendering Type 3: Using ternary operator
+function BlogDetails({ show }) {
+  return show ? (
+    <div className="column">
+      <h2>Blog Details</h2>
+      <h3>React Learning</h3>
+      <p><strong>Stephen Biz</strong></p>
+      <p>Welcome to learning React!</p>
+      <h3>Installation</h3>
+      <p><strong>Schwezdenier</strong></p>
+      <p>You can install React from npm.</p>
+    </div>
+  ) : null;
+}
+
+function App() {
+  const showCourses = true;
+  const showBooks = true;
+  const showBlogs = true;
+
+  return (
+    <div className="container">
+      <CourseDetails show={showCourses} />
+      <BookDetails show={showBooks} />
+      <BlogDetails show={showBlogs} />
+    </div>
+  );
+}
+
+export default App;
