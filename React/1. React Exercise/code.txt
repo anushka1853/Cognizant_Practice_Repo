@@ -1,0 +1,28 @@
+// ======== App.js ========
+
+import React from 'react';
+import './App.css';
+
+function App() {
+  return (
+    <div className="App">
+      <h1>Welcome the first session of React</h1>
+    </div>
+  );
+}
+
+export default App;
+
+
+// ======== App.css ========
+
+.App {
+  text-align: center;
+  margin-top: 100px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
