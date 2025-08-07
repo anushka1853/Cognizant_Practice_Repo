@@ -1,0 +1,59 @@
+import React, { useState } from 'react';
+
+function App() {
+  const [count, setCount] = useState(5);
+  const [amount, setAmount] = useState('');
+  const [currency, setCurrency] = useState('');
+
+  const increment = () => {
+    setCount(count + 1);
+    alert("Hello! Member1");
+  };
+
+  const decrement = () => setCount(count - 1);
+  const sayWelcome = () => alert("Welcome to the Currency Converter App!");
+  const handleClick = () => alert("Button clicked!");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(`You entered ${amount} in ${currency}`);
+  };
+
+  return (
+    <div style={{ padding: '20px', fontFamily: 'Arial' }}>
+      <h2>{count}</h2>
+      <button onClick={increment}>Increment</button>
+      <button onClick={decrement}>Decrement</button>
+      <br /><br />
+      <button onClick={sayWelcome}>Say Welcome</button>
+      <button onClick={handleClick}>Click Me</button>
+
+      <h3 style={{ color: 'green' }}>Currency Converter</h3>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Amount:
+          <input
+            type="text"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            style={{ marginLeft: '10px' }}
+          />
+        </label>
+        <br /><br />
+        <label>
+          Currency:
+          <input
+            type="text"
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value)}
+            style={{ marginLeft: '10px' }}
+          />
+        </label>
+        <br /><br />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
+}
+
+export default App;
