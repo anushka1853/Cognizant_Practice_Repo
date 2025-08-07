@@ -1,0 +1,110 @@
+// app.js 
+
+import React from "react";
+import ReactDOM from "react-dom";
+import "./app.css"; // importing CSS
+
+
+const officeImage = "https://via.placeholder.com/400x200?text=Office+Space";
+
+
+const office = {
+  name: "Elite Workspace",
+  rent: 55000,
+  address: "123, Cyber City, Bengaluru",
+};
+
+
+const officeList = [
+  {
+    name: "Elite Workspace",
+    rent: 55000,
+    address: "123, Cyber City, Bengaluru",
+  },
+  {
+    name: "Urban Desk",
+    rent: 62000,
+    address: "221B Baker Street, Mumbai",
+  },
+  {
+    name: "TechHub Office",
+    rent: 48000,
+    address: "45, Hi-Tech Valley, Hyderabad",
+  },
+  {
+    name: "Innovate Space",
+    rent: 70000,
+    address: "56, Industrial Area, Pune",
+  },
+];
+
+function App() {
+  return (
+    <div className="container">
+      {/* Heading */}
+      <h1>Office Space Rental Listings</h1>
+
+      {/* Image */}
+      <img src={officeImage} alt="Office Space" className="office-image" />
+
+      {/* Single Office Object Display */}
+      <div className="single-office">
+        <h2>Featured Office</h2>
+        <p><strong>Name:</strong> {office.name}</p>
+        <p><strong>Rent:</strong> ₹<span className={office.rent < 60000 ? "low-rent" : "high-rent"}>{office.rent}</span></p>
+        <p><strong>Address:</strong> {office.address}</p>
+      </div>
+
+      <hr />
+
+      {/* List of Offices Display */}
+      <div className="office-list">
+        <h2>Available Office Spaces</h2>
+        {officeList.map((item, index) => (
+          <div key={index} className="office-card">
+            <p><strong>Name:</strong> {item.name}</p>
+            <p><strong>Rent:</strong> ₹<span className={item.rent < 60000 ? "low-rent" : "high-rent"}>{item.rent}</span></p>
+            <p><strong>Address:</strong> {item.address}</p>
+            <hr />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
+
+
+// app.css
+
+.container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.office-image {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.office-card, .single-office {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.low-rent {
+  color: red;
+  font-weight: bold;
+}
+
+.high-rent {
+  color: green;
+  font-weight: bold;
+}
