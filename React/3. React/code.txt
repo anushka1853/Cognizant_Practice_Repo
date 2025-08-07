@@ -1,0 +1,69 @@
+// ======== mystyle.css ========
+
+
+.container {
+  width: 50%;
+  margin: auto;
+  padding: 20px;
+  background-color: #f0f8ff;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+  color: #333;
+  font-family: Arial, sans-serif;
+}
+
+p {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+
+
+// ======== CalculateScore.js ========
+
+import React from 'react';
+import '../Stylesheets/mystyle.css';
+
+function CalculateScore(props) {
+  const { name, school, total, goal } = props;
+
+  const average = total / goal;
+
+  return (
+    <div className="container">
+      <h2>Student Score Report</h2>
+      <p><strong>Name:</strong> {name}</p>
+      <p><strong>School:</strong> {school}</p>
+      <p><strong>Total Marks:</strong> {total}</p>
+      <p><strong>Goal (Subjects):</strong> {goal}</p>
+      <p><strong>Average Score:</strong> {average.toFixed(2)}</p>
+    </div>
+  );
+}
+
+export default CalculateScore;
+
+
+// ======== App.js ========
+
+import React from 'react';
+import CalculateScore from './Components/CalculateScore';
+
+function App() {
+  return (
+    <div className="App">
+      <CalculateScore
+        name="Anushka Gour"
+        school="Green Valley High School"
+        total={460}
+        goal={5}
+      />
+    </div>
+  );
+}
+
+export default App;
