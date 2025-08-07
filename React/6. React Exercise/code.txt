@@ -1,0 +1,96 @@
+// ========== ListofPlayers.js ==========
+import React from 'react';
+
+const ListofPlayers = ({ players }) => {
+  return (
+    <div>
+      {players.map((player, index) => (
+        <p key={index}>{player.name} - {player.score}</p>
+      ))}
+    </div>
+  );
+};
+
+export default ListofPlayers;
+
+// ========== Scorebelow70.js ==========
+import React from 'react';
+
+const Scorebelow70 = ({ players }) => {
+  const filtered = players.filter(player => player.score < 70);
+  return (
+    <div>
+      {filtered.map((player, index) => (
+        <p key={index}>{player.name} - {player.score}</p>
+      ))}
+    </div>
+  );
+};
+
+export default Scorebelow70;
+
+// ========== OddPlayers.js ==========
+import React from 'react';
+
+const OddPlayers = (players) => {
+  const { team } = players;
+  const odd = team.filter((_, index) => index % 2 !== 0);
+  return (
+    <div>
+      {odd.map((player, index) => (
+        <p key={index}>{player}</p>
+      ))}
+    </div>
+  );
+};
+
+export default OddPlayers;
+
+// ========== EvenPlayers.js ==========
+import React from 'react';
+
+const EvenPlayers = (players) => {
+  const { team } = players;
+  const even = team.filter((_, index) => index % 2 === 0);
+  return (
+    <div>
+      {even.map((player, index) => (
+        <p key={index}>{player}</p>
+      ))}
+    </div>
+  );
+};
+
+export default EvenPlayers;
+
+// ========== ListofIndianPlayers.js ==========
+import React from 'react';
+
+const ListofIndianPlayers = ({ IndianPlayers }) => {
+  return (
+    <div>
+      {IndianPlayers.map((player, index) => (
+        <p key={index}>{player}</p>
+      ))}
+    </div>
+  );
+};
+
+export default ListofIndianPlayers;
+
+// ========== App.js ==========
+import React from 'react';
+import ListofPlayers from './ListofPlayers';
+import Scorebelow70 from './Scorebelow70';
+import OddPlayers from './OddPlayers';
+import EvenPlayers from './EvenPlayers';
+import ListofIndianPlayers from './ListofIndianPlayers';
+
+function App() {
+  const flag = true;
+
+  const players = [
+    { name: "Rohit Sharma", score: 95 },
+    { name: "Virat Kohli", score: 87 },
+    { name: "Hardik Pandya", score: 68 },
+    { name: "Rishabh Pant", score
